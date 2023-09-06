@@ -49,7 +49,7 @@ class Solution {
             int count = recursionHelper(coins, remain-coin); // and will test all subproblems of the primary subproblems
             if(count == -1) continue; // if -1 base case reached, means the line of coins resulted in - remaining value. termiante.
             minCount = Math.min(minCount, count + 1); // +1 needed since base case is 0. need +1 indicates
-            // the final coin that was used to reach base case
+            // the final coin that was used to reach base case.
         }
 
         memo[remain] = minCount == Integer.MAX_VALUE ? -1 : minCount; // store subproblem
