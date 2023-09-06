@@ -29,7 +29,12 @@ class Solution {
     private Integer[] memo; // for memoization
 
     public int coinChange(int[] coins, int amount) {
-        memo = new Integer[amount + 1]; // why +1?
+        memo = new Integer[amount + 1]; // the +1 is because the purpose of the memor table is to
+        // take a subproblem such as '9' and go through its recursive steps and
+        // then record the min number of coins required to make that value
+        // +1 is required to map the subproblem amount '9' to the correct index
+        // table length of 10 = max index of 9. minCoins for subproblem 9 stored at
+        // index 9
         return recursionHelper(coins, amount);
     }
 
@@ -43,7 +48,8 @@ class Solution {
         for(int coin: coins){ // will test all primary subproblems
             int count = recursionHelper(coins, remain-coin); // and will test all subproblems of the primary subproblems
             if(count == -1) continue; // if -1 base case reached, means the line of coins resulted in - remaining value. termiante.
-            minCount = Math.min(minCount, count + 1);
+            minCount = Math.min(minCount, count + 1); // +1 needed since base case is 0. need +1 indicates
+            // the final coin that was used to reach base case
         }
 
         memo[remain] = minCount == Integer.MAX_VALUE ? -1 : minCount; // store subproblem
